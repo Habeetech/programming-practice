@@ -1,36 +1,33 @@
 #include "main.h"
-
-int main (void)
+int main(void)
 {
 	pid_t child;
 	int status;
 	char *cmd = NULL;
 	size_t len = 0;
-
-	while(1)
+	while (1)
 	{
 		printf("OlaShell $: ");
 		getline(&cmd, &len, stdin);
 		cmd[strcspn(cmd, "\n")] = '\0';
-		if(strcmp(cmd, "ls") == 0)
-				{
-				child = fork();
-				{
-				if (child == 0)
-				{
-				run_command("/bin/ls");
+		if (strcmp(cmd, "ls") == 0)
+		{
+			child = fork();
+			if (child == 0)
+			{
+				run_command("/usr/bin/ls");
 				exit(EXIT_SUCCESS);
-				}
-				else
-				{
+			}
+			else
+			{
 				wait(&status);
-				}
-				else
-				{
-				printf("command not found");
-				}
-				}
+			}
+		}
+		else
+		{
+			printf("Command not found.\n");
+		}
 	}
-	}
-return 0;
+	free(cmd);
+	return 0;
 }
