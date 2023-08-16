@@ -4,13 +4,18 @@
 #include <sys/wait.h>
 #include <string.h>
 
-int main (int argc, char *argv[])
+int main (void)
 {
 pid_t child;
 int status;
+char *buf = NULL;
+size_t len = 0;
+
 while(1)
 	{
-		if (strcmp(argv[1], "exit") == 0)
+		printf("OlaShell $: ");
+		getline(&buf, &len, stdin);
+		if (strcmp(buf, "exit") == 0)
 			{
 				break;
 			}
