@@ -1,31 +1,31 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <string.h>
+#include "main.h"
 
 int main (void)
 {
-pid_t child;
-int status;
-char *buf = NULL;
-size_t len = 0;
+	pid_t child;
+	int status;
+	char *cmd = NULL;
+	size_t len = 0;
 
-while(1)
+	while(1)
 	{
 		printf("OlaShell $: ");
-		getline(&buf, &len, stdin);
-		if (strcmp(buf, "exit") == 0)
-			{
-				break;
-			}
-		child = fork();
-		if (child == 0)
+		getline(&cmd, &len, stdin);
+		switch(cmd)
 		{
-		}
-		else
-		{
+			case 'ls':
+				child = fork();
+				if (child == 0)
+				{
+				run_ls(cmd);
+				}
+				else
+				{
 			wait(&status);
+				}
+				break;
+			default:
+			break;
 		}
 	}
 return 0;
