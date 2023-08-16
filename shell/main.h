@@ -5,5 +5,5 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-void run_ls(char *cmd);
+void run_command(char *cmd);
 #endif

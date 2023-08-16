@@ -11,22 +11,26 @@ int main (void)
 	{
 		printf("OlaShell $: ");
 		getline(&cmd, &len, stdin);
-		switch(cmd)
-		{
-			case 'ls':
+		cmd[strcspn(cmd, "\n")] = '\0';
+		if(strcmp(cmd, "ls") == 0)
+				{
 				child = fork();
+				{
 				if (child == 0)
 				{
-				run_ls(cmd);
+				run_command("/bin/ls");
+				exit(EXIT_SUCCESS);
 				}
 				else
 				{
-			wait(&status);
+				wait(&status);
 				}
-				break;
-			default:
-			break;
-		}
+				else
+				{
+				printf("command not found");
+				}
+				}
+	}
 	}
 return 0;
 }
