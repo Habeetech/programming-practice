@@ -10,6 +10,10 @@ int main(void)
 		printf("OlaShell $: ");
 		getline(&cmd, &len, stdin);
 		cmd[strcspn(cmd, "\n")] = '\0';
+		if (strcmp(cmd, "exit") == 0)
+		{
+			break;
+		}
 		if (strcmp(cmd, "ls") == 0)
 		{
 			child = fork();
