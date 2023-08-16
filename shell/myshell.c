@@ -27,6 +27,19 @@ int main(void)
 				wait(&status);
 			}
 		}
+		if(strcmp(cmd, "clear") == 0)
+		{
+			child = fork();
+			if (child == 0)
+			{
+				run_command("/usr/bin/clear");
+				exit(EXIT_SUCCESS);
+			}
+			else
+			{
+				wait(&status);
+			}
+		}
 		else
 		{
 			printf("Command not found.\n");
